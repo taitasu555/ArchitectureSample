@@ -14,10 +14,14 @@ func init() {
 	router := gin.Default()
 
 	userController := controllers.NewUserController(NewSqlHandler())
+	taskController := controllers.NewTaskController(NewSqlHandler())
 
-	router.POST("/users", func(c *gin.Context) { userController.Create(c) })
-	router.GET("/users", func(c *gin.Context) { userController.Index(c) })
-	router.GET("/users/:id", func(c *gin.Context) { userController.Show(c) })
+	router.POST("/users", func(c *gin.Context) { userController.CreateUser(c) })
+	router.GET("/users", func(c *gin.Context) { userController.IndexUser(c) })
+	router.GET("/users/:id", func(c *gin.Context) { userController.ShowUser(c) })
+	router.GET("/tasks", func(c *gin.Context) { taskController.IndexTask(c) })
+	router.POST("/tasks", func(c *gin.Context) { taskController.CreateTask(c) })
+	router.GET("/tasks/:id", func(c *gin.Context) { taskController.ShowTask(c) })
 
 	Router = router
 }

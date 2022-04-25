@@ -23,7 +23,7 @@ func NewUserController(sqlHandler database.SqlHandler) *UserController {
 	}
 }
 
-func (controller *UserController) Create(c Context) {
+func (controller *UserController) CreateUser(c Context) {
 	u := domain.User{}
 	c.Bind(&u)
 	user, err := controller.Interactor.Add(u)
@@ -34,7 +34,7 @@ func (controller *UserController) Create(c Context) {
 	c.JSON(201, user)
 }
 
-func (controller *UserController) Index(c Context) {
+func (controller *UserController) IndexUser(c Context) {
 	users, err := controller.Interactor.Users()
 	if err != nil {
 		c.JSON(500, NewError(err))
@@ -43,7 +43,7 @@ func (controller *UserController) Index(c Context) {
 	c.JSON(200, users)
 }
 
-func (controller *UserController) Show(c Context) {
+func (controller *UserController) ShowUser(c Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	user, err := controller.Interactor.UserById(id)
 	if err != nil {
