@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run serve",
-    "serve": "node dist/infrastructure/server.js",
+    "serve": "node dist/infrastructure/server.js ",
     "dev": "NODE_ENV=development nodemon --config ./nodemon.json",
     "tsc": ".\\node_modules\\.bin\\tsc",
     "build": "rimraf dist && tsc -p tsconfig.json --outDir dist",

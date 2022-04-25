@@ -11,8 +11,8 @@ app.use(bodyParser.json())
 // Route設定
 app.use('/api', router)
 
-app.listen(3000, () => {
-  console.log('listening on port 3000')
+app.listen(3001, () => {
+  console.log('listening on port 3001')
 })
 
 export default app

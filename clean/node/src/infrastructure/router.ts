@@ -1,9 +1,12 @@
 import express from "express";
 import { TasksController } from "../interfaces/controllers/TasksController";
+import { UsersController } from "../interfaces/controllers/UsersController";
 import { MysqlConnection } from "./MysqlConnection";
 
 const mysqlConnection = new MysqlConnection();
 const tasksController = new TasksController(mysqlConnection);
+const usersController = new UsersController(mysqlConnection);
+
 let router = express.Router();
 
 router.get("/tasks", async (req: express.Request, res: express.Response) => {
@@ -39,5 +42,15 @@ router.delete(
     res.send(result);
   }
 );
+
+router.post("/users", async (req: express.Request, res: express.Response) => {
+  let result = await usersController.createUser(req, res);
+  res.send(result);
+});
+
+router.get("/users", async (req: express.Request, res: express.Response) => {
+  let result = await usersController.findUser(req, res);
+  res.send(result);
+});
 
 export default router;
