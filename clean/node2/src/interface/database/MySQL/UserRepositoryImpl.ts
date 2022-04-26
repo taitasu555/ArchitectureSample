@@ -1,10 +1,7 @@
 import { User } from '../../../domain/User';
-import { IUserRepository } from '../../../application/repo/user/IUserRepo';
+import { IUserRepository } from '../repository/user/IUserRepository';
 import { IDBConnection } from './IDBConnection';
-import {
-  TUpdateUserDTO,
-  TCreateUserDTO,
-} from '../../../application/repo/user/DTO';
+import { TUpdateUserDTO, TCreateUserDTO } from '../repository/user/DTO';
 
 class UserRepository extends IUserRepository {
   private connection: IDBConnection;
@@ -14,24 +11,28 @@ class UserRepository extends IUserRepository {
     this.connection = connection;
   }
 
+  // MEMO: Objそのものをもどすと、_idみたいなjsonが却ってしまうのでここで変換をかます。
+  // けどその変換はserializerに任せることにする。
   private convertModel(r: User): User {
-    const user = new User();
+    let user = new User();
     user.id = r.id;
     user.name = r.name;
     user.age = r.age;
     return user;
   }
 
+  // TODO: DTOを戻すようにする
   public async find(id: number): Promise<User> {
-    const queryResults = await this.connection.execute(
+    let queryResults = await this.connection.execute(
       'select * from Users where id = ? limit 1',
       id,
     );
     return this.convertModel(queryResults[0]);
   }
 
+  // TODO: DTOを戻すようにする
   public async findAll(): Promise<User[]> {
-    const queryResults: User[] = await this.connection.execute(
+    let queryResults: User[] = await this.connection.execute(
       'select * from Users',
     );
     const results = queryResults.map(
@@ -44,7 +45,9 @@ class UserRepository extends IUserRepository {
 
   public async create(createUserDto: TCreateUserDTO): Promise<User> {
     const user = await this.connection.execute(
-      `INSERT INTO Users (name, age) VALUES ("${createUserDto.name}", "${createUserDto.age}")`,
+      `INSERT INTO Users (name, age) VALUES ("${createUserDto.name}", "${
+        createUserDto.age
+      }")`,
     );
     return user;
   }

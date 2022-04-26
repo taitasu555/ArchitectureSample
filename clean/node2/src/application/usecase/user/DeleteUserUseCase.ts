@@ -1,4 +1,4 @@
-import { IUserRepository } from '../../repo/user/IUserRepo';
+import { IUserRepository } from '../../../interface/database/repository/user/IUserRepository';
 
 class DeleteUserUseCase {
   private userRepository: IUserRepository;

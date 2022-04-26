@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const DTO_1 = require("../../repo/user/DTO");
+const DTO_1 = require("../../../interface/database/repository/user/DTO");
 class CreateUserUseCase {
     constructor(userRepository) {
         this.userRepository = userRepository;

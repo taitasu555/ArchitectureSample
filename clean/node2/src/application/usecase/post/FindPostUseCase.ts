@@ -1,6 +1,5 @@
-import { IPostRepository } from '../../repo/post/IPostRepository';
-
-import { TPostAndUserDTO } from '../../repo/post/DTO';
+import { IPostRepository } from '../../../interface/database/repository/post/IPostRepository';
+import { TPostAndUserDTO } from '../../../interface/database/repository/post/DTO';
 
 class FindPostUseCase {
   private postRepository: IPostRepository;

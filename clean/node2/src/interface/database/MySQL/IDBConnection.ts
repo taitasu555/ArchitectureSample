@@ -1,4 +1,4 @@
 export abstract class IDBConnection {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  /* eslint @typescript-eslint/no-explicit-any: 0 */
   abstract execute(query: string, params?: any): any;
 }

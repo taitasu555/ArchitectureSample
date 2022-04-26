@@ -1,4 +1,4 @@
-import { IUserRepository } from '../../repo/user/IUserRepo';
+import { IUserRepository } from '../../../interface/database/repository/user/IUserRepository';
 import { User } from '../../../domain/User';
 
 class FindUserUseCase {

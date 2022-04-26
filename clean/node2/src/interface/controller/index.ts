@@ -1,3 +1,4 @@
-import { UserController } from './UserController';
+import { PostController } from "./PostController";
+import { UserController } from "./UserController";
 
-export default { UserController };
+export default { PostController, UserController };

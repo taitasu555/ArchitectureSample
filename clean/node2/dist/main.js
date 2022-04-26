@@ -12,10 +12,6 @@ app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(body_parser_1.default.json());
 // Route設定
 app.use('/api', router_1.default);
-//404
-router_1.default.use((req, res) => {
-    res.status(404).send('404 Not Found');
-});
 app.listen(3000, () => {
     console.log('listening on port 3000');
 });

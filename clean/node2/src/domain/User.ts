@@ -1,5 +1,10 @@
+/**
+ * memo: 最重要ビジネスルールと最重要ビジネスデータは同じファイルに閉じ込めるべし
+ */
+
+// Q: getter/setterからしか設定できないようにするメリットってなに？
 class User {
-  private _id: number;
+  private _id: number; // Q: idってnullでもいいかな？
   private _name: string;
   private _age: number;
 

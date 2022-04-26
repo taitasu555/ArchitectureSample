@@ -1,6 +1,9 @@
 import { Post } from '../../../domain/Post';
-import { IPostRepository } from '../../repo/post/IPostRepository';
-import { toCreatePostDTO, TPostAndUserDTO } from '../../repo/post/DTO';
+import { IPostRepository } from '../../../interface/database/repository/post/IPostRepository';
+import {
+  toCreatePostDTO,
+  TPostAndUserDTO,
+} from '../../../interface/database/repository/post/DTO';
 
 class CreatePostUseCase {
   private postRepository: IPostRepository;

@@ -1,6 +1,6 @@
 import { User } from '../../../domain/User';
-import { IUserRepository } from '../../repo/user/IUserRepo';
-import { toCreateUserDTO } from '../../repo/user/DTO';
+import { IUserRepository } from '../../../interface/database/repository/user/IUserRepository';
+import { toCreateUserDTO } from '../../../interface/database/repository/user/DTO';
 
 class CreateUserUseCase {
   private userRepository: IUserRepository;

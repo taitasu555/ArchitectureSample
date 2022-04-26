@@ -9,28 +9,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const User_1 = require("../../../domain/User");
-const IUserRepo_1 = require("../../../application/repo/user/IUserRepo");
-class UserRepository extends IUserRepo_1.IUserRepository {
+const IUserRepository_1 = require("../repository/user/IUserRepository");
+class UserRepository extends IUserRepository_1.IUserRepository {
     constructor(connection) {
         super();
         this.connection = connection;
     }
+    // MEMO: Objそのものをもどすと、_idみたいなjsonが却ってしまうのでここで変換をかます。
+    // けどその変換はserializerに任せることにする。
     convertModel(r) {
-        const user = new User_1.User();
+        let user = new User_1.User();
         user.id = r.id;
         user.name = r.name;
         user.age = r.age;
         return user;
     }
+    // TODO: DTOを戻すようにする
     find(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const queryResults = yield this.connection.execute('select * from Users where id = ? limit 1', id);
+            let queryResults = yield this.connection.execute('select * from Users where id = ? limit 1', id);
             return this.convertModel(queryResults[0]);
         });
     }
+    // TODO: DTOを戻すようにする
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            const queryResults = yield this.connection.execute('select * from Users');
+            let queryResults = yield this.connection.execute('select * from Users');
             const results = queryResults.map((m) => {
                 return this.convertModel(m);
             });

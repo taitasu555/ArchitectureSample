@@ -16,7 +16,7 @@ const controller_1 = __importDefault(require("../interface/controller"));
 const MysqlConnection_1 = require("../infrastructure/MysqlConnection");
 const con = new MysqlConnection_1.MysqlConnection();
 const userController = new controller_1.default.UserController(con);
-// const postController = new Controller.PostController(con);
+const postController = new controller_1.default.PostController(con);
 const router = express_1.default.Router();
 // user
 router.get('/users', (_, res) => __awaiter(this, void 0, void 0, function* () {
@@ -40,33 +40,21 @@ router.delete('/users/:id', (req, res) => __awaiter(this, void 0, void 0, functi
     res.send(result);
 }));
 // post
-// router.get(
-//   '/posts',
-//   async (_, res: express.Response): Promise<void> => {
-//     let results = await postController.findAllPost();
-//     res.send(results);
-//   },
-// );
-// router.get(
-//   '/posts/:id',
-//   async (req: TFindPostRequest, res: express.Response): Promise<void> => {
-//     let result = await postController.findPost(req);
-//     res.send(result);
-//   },
-// );
-// router.post(
-//   '/posts',
-//   async (req: TCreatePostRequest, res: express.Response): Promise<void> => {
-//     let result = await postController.createPost(req);
-//     res.send(result);
-//   },
-// );
-// router.delete(
-//   '/posts/:id',
-//   async (req: TDeletePostRequest, res: express.Response): Promise<void> => {
-//     let result = await postController.deletePost(req);
-//     res.send(result);
-//   },
-// );
+router.get('/posts', (_, res) => __awaiter(this, void 0, void 0, function* () {
+    let results = yield postController.findAllPost();
+    res.send(results);
+}));
+router.get('/posts/:id', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let result = yield postController.findPost(req);
+    res.send(result);
+}));
+router.post('/posts', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let result = yield postController.createPost(req);
+    res.send(result);
+}));
+router.delete('/posts/:id', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let result = yield postController.deletePost(req);
+    res.send(result);
+}));
 exports.default = router;
 //# sourceMappingURL=router.js.map

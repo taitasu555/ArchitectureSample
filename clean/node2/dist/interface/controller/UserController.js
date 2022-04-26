@@ -11,16 +11,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const CreateUserRequest_1 = require("../request/user/CreateUserRequest");
 const UserSerializer_1 = require("../serializer/UserSerializer");
 const UserRepositoryImpl_1 = require("../database/MySQL/UserRepositoryImpl");
 const user_1 = __importDefault(require("../../application/usecase/user"));
 const User_1 = require("../../domain/User");
 const FindUserRequest_1 = require("../request/user/FindUserRequest");
-const CreateUserRequest_1 = require("../request/user/CreateUserRequest");
 class UserController {
     constructor(dbConnection) {
         this.userSerializer = new UserSerializer_1.UserSerializer();
-        //database/mysqlでsql分を使用することができるようにする
         this.userRepository = new UserRepositoryImpl_1.UserRepository(dbConnection);
     }
     // MEMO: これJavaだったらannotationつけるだけで例外のハンドリングできるんだよなぁ・・・
@@ -66,10 +65,7 @@ class UserController {
                 const body = req.body;
                 const useCase = new user_1.default.UpdateUserUseCase(this.userRepository);
                 const user = new User_1.User(id, body.name, body.age);
-                console.log(user);
-                console.log(id);
                 let result = yield useCase.updateUser(user);
-                console.log(result, 'this is my log');
                 return this.userSerializer.user(result);
             }
             catch (error) {

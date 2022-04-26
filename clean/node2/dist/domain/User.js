@@ -1,5 +1,9 @@
 "use strict";
+/**
+ * memo: 最重要ビジネスルールと最重要ビジネスデータは同じファイルに閉じ込めるべし
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
+// Q: getter/setterからしか設定できないようにするメリットってなに？
 class User {
     get name() {
         return this._name;

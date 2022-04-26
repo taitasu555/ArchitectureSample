@@ -1,29 +1,29 @@
-import { UserSerializer, UserResponse } from '../serializer/UserSerializer';
-import { UserRepository } from '../database/MySQL/UserRepositoryImpl';
-import { IDBConnection } from '../database/MySQL/IDBConnection';
-import UserUseCase from '../../application/usecase/user';
-import { User } from '../../domain/User';
-import { TResponse } from '../serializer/ApplicationSerializer';
-import {
-  TFindUserRequest,
-  FindUserRequest,
-} from '../request/user/FindUserRequest';
-import { TDeleteUserRequest } from '../request/user/DeleteUserRequest';
-import { UpdateUserRequest } from '../request/user/UpdateUserRequest';
 import {
   CreateUserRequest,
   TCreateUserRequest,
 } from '../request/user/CreateUserRequest';
+import { UserSerializer, UserResponse } from '../serializer/UserSerializer';
+import { UserRepository } from '../database/MySQL/UserRepositoryImpl';
+import UserUseCase from '../../application/usecase/user';
+import { UpdateUserRequest } from '../request/user/UpdateUserRequest';
+import { IDBConnection } from '../database/MySQL/IDBConnection';
+import { User } from '../../domain/User';
+import {
+  TFindUserRequest,
+  FindUserRequest,
+} from '../request/user/FindUserRequest';
+import { TResponse } from '../serializer/ApplicationSerializer';
+import { TDeleteUserRequest } from '../request/user/DeleteUserRequest';
+
 class UserController {
   private userSerializer: UserSerializer;
-  //db 処理
   private userRepository: UserRepository;
 
   public constructor(dbConnection: IDBConnection) {
     this.userSerializer = new UserSerializer();
-    //database/mysqlでsql分を使用することができるようにする
     this.userRepository = new UserRepository(dbConnection);
   }
+
   // MEMO: これJavaだったらannotationつけるだけで例外のハンドリングできるんだよなぁ・・・
   public async findUser(
     req: TFindUserRequest,
@@ -69,10 +69,7 @@ class UserController {
       const body = req.body;
       const useCase = new UserUseCase.UpdateUserUseCase(this.userRepository);
       const user = new User(id, body.name, body.age);
-      console.log(user);
-      console.log(id);
       let result = await useCase.updateUser(user);
-      console.log(result, 'this is my log');
       return this.userSerializer.user(result);
     } catch (error) {
       return this.userSerializer.error(error);

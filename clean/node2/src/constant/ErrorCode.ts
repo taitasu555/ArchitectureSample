@@ -16,7 +16,10 @@ const StatusCode = {
 };
 
 interface TException {
-  code: typeof INVALID_CODE | typeof EXCEPTION_CODE | typeof UNDEFINED_CODE;
+  code:
+    | typeof StatusCode.invalid
+    | typeof StatusCode.exception
+    | typeof StatusCode.undefined;
   message: string;
 }
 

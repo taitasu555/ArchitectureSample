@@ -11,7 +11,7 @@ import { MysqlConnection } from '../infrastructure/MysqlConnection';
 
 const con = new MysqlConnection();
 const userController = new Controller.UserController(con);
-// const postController = new Controller.PostController(con);
+const postController = new Controller.PostController(con);
 const router = express.Router();
 
 // user
@@ -56,36 +56,36 @@ router.delete(
 );
 
 // post
-// router.get(
-//   '/posts',
-//   async (_, res: express.Response): Promise<void> => {
-//     let results = await postController.findAllPost();
-//     res.send(results);
-//   },
-// );
+router.get(
+  '/posts',
+  async (_, res: express.Response): Promise<void> => {
+    let results = await postController.findAllPost();
+    res.send(results);
+  },
+);
 
-// router.get(
-//   '/posts/:id',
-//   async (req: TFindPostRequest, res: express.Response): Promise<void> => {
-//     let result = await postController.findPost(req);
-//     res.send(result);
-//   },
-// );
+router.get(
+  '/posts/:id',
+  async (req: TFindPostRequest, res: express.Response): Promise<void> => {
+    let result = await postController.findPost(req);
+    res.send(result);
+  },
+);
 
-// router.post(
-//   '/posts',
-//   async (req: TCreatePostRequest, res: express.Response): Promise<void> => {
-//     let result = await postController.createPost(req);
-//     res.send(result);
-//   },
-// );
+router.post(
+  '/posts',
+  async (req: TCreatePostRequest, res: express.Response): Promise<void> => {
+    let result = await postController.createPost(req);
+    res.send(result);
+  },
+);
 
-// router.delete(
-//   '/posts/:id',
-//   async (req: TDeletePostRequest, res: express.Response): Promise<void> => {
-//     let result = await postController.deletePost(req);
-//     res.send(result);
-//   },
-// );
+router.delete(
+  '/posts/:id',
+  async (req: TDeletePostRequest, res: express.Response): Promise<void> => {
+    let result = await postController.deletePost(req);
+    res.send(result);
+  },
+);
 
 export default router;
